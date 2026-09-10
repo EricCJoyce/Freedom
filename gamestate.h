@@ -123,7 +123,7 @@ void makeMove(Move* move, GameState* gs)
   {
     unsigned char freedomCtr = 0;
                                                                     //  Plant the stone.
-    gs->board[move->index] = gs->whiteToMove ? _WHITE_TO_MOVE : _BLACK_TO_MOVE;
+    gs->board[move->index] = gs->whiteToMove ? _WHITE_STONE : _BLACK_STONE;
                                                                     //  Now sweep the area: everything occupied?
     if(u(move->index) < _NONE && isEmpty(u(move->index), gs))
       freedomCtr++;

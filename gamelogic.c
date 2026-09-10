@@ -2,7 +2,7 @@
 
 Game logic module for the human player.
 
-sudo docker run --rm -v $(pwd):/src -u $(id -u):$(id -g) --mount type=bind,source=$(pwd),target=/home/src c-wasm emcc -Os -s STANDALONE_WASM -s EXPORTED_FUNCTIONS="['_getCurrentState','_getMovesBuffer','_sideToMove_client','_isWhite_client','_isBlack_client','_isEmpty_client','_isLive_client','_whiteScore_client','_blackScore_client','_anchor_client','_getMoves_client','_makeMove_client','_isTerminal_client','_isWin_client','_draw']" -Wl,--no-entry "gamelogic.c" -o "gamelogic.wasm"
+sudo docker run --rm -v $(pwd):/src -u $(id -u):$(id -g) --mount type=bind,source=$(pwd),target=/home/src c-wasm emcc -Os -s STANDALONE_WASM -s INITIAL_HEAP=1048576 -s EXPORTED_FUNCTIONS="['_getCurrentState','_getMovesBuffer','_sideToMove_client','_isWhite_client','_isBlack_client','_isEmpty_client','_isLive_client','_whiteScore_client','_blackScore_client','_anchor_client','_getMoves_client','_makeMove_client','_isTerminal_client','_isWin_client','_draw']" -Wl,--no-entry "gamelogic.c" -o "gamelogic.wasm"
 
 */
 
@@ -304,7 +304,7 @@ unsigned int getMoves_client(void)
     len = getMoves(&gs, moves);
 
     for(i = 0; i < len; i++)
-      movesBuffer[i] = moves[len].index;
+      movesBuffer[i] = moves[i].index;
 
     return len;
   }
